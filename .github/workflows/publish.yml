@@ -22,6 +22,13 @@ jobs:
         run: |
           npm install  # Install dependencies, or yarn if you prefer
 
+      - name: Clean up untracked files
+        run: git clean -fdx  # Clean untracked files and directories
+
+      - name: Check Git status
+        run: |
+          git status  # Verify that there are no uncommitted changes
+
       - name: Set up NPM authentication
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 

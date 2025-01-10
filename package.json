@@ -1,6 +1,6 @@
 {
-  "name": "b-expo-dynamic-app-icon",
-  "version": "1.2.7",
+  "name": "@arindambiswas1/b-expo-dynamic-app-icon",
+  "version": "1.0.0",
   "description": "Expo dynamic app icon, Change app icon on IOS And Android with a single line of code",
   "main": "build/index.js",
   "types": "build/index.d.ts",

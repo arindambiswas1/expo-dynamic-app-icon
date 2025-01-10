@@ -15,7 +15,7 @@ class ExpoDynamicAppIconModule : Module() {
     override fun definition() = ModuleDefinition {
         Name("ExpoDynamicAppIcon")
 
-        Function("setAppIcon") { name: String, defaultIcon: String? ->
+        Function("setAppIcon") { name: String, defaultIcon: String? -> 
             try {
                 val newIcon = "${context.packageName}.MainActivity$name"
                 val defaultIconName = defaultIcon?.let { "${context.packageName}.MainActivity$it" }
@@ -80,7 +80,8 @@ class ExpoDynamicAppIconModule : Module() {
                 PackageManager.GET_ACTIVITIES
             ).activities
 
-            activities.firstOrNull {
+            // Safe call to handle nullable activities array
+            activities?.firstOrNull {
                 packageManager.getComponentEnabledSetting(
                     ComponentName(context.packageName, it.name)
                 ) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED

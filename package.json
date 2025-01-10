@@ -1,6 +1,6 @@
 {
-  "name": "nixa-expo-dynamic-app-icon",
-  "version": "1.2.6",
+  "name": "b-expo-dynamic-app-icon",
+  "version": "1.2.7",
   "description": "Expo dynamic app icon, Change app icon on IOS And Android with a single line of code",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -24,20 +24,22 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kouloughli-hemza/expo-dynamic-app-icon.git"
+    "url": "git+https://github.com/arindambiswas1/expo-dynamic-app-icon.git"
   },
   "bugs": {
-    "url": "https://github.com/kouloughli-hemza/expo-dynamic-app-icon/issues"
+    "url": "https://github.com/arindambiswas1/expo-dynamic-app-icon/issues"
   },
   "author": "Hemza kouloughli <hemza@nixa.ca>",
   "license": "MIT",
-  "homepage": "https://github.com/kouloughli-hemza/expo-dynamic-app-icon#readme",
-  "dependencies": {},
+  "homepage": "https://github.com/arindambiswas1/expo-dynamic-app-icon#readme",
+  "dependencies": {
+    "expo-modules": "^0.0.0"
+  },
   "devDependencies": {
     "@expo/image-utils": "^0.3.23",
     "@types/react": "^18.0.25",
     "@types/react-native": "^0.70.6",
-    "expo-module-scripts": "^3.0.3",
+    "expo-module-scripts": "^3.5.4",
     "expo-modules-core": "^1.0.3"
   },
   "peerDependencies": {

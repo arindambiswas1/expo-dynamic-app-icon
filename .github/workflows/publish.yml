@@ -1,0 +1,33 @@
+name: Build and Publish Expo Module
+
+on:
+  push:
+    branches:
+      - main  # Trigger the action only on pushes to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can use macos-latest if you're building for iOS
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2  # Checkout the code
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Specify the Node.js version you want to use
+
+      - name: Install dependencies
+        run: |
+          npm install  # Install dependencies, or yarn if you prefer
+
+      - name: Run build
+        run: |
+          npm run build  # Or use your custom build script
+
+      - name: Publish to npm
+        run: |
+          npm publish --access public  # Publish to npm, --access public is required for public packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Store your NPM token in GitHub Secrets

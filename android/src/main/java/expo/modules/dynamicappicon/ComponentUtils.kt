@@ -19,7 +19,9 @@ object ComponentUtils {
                 PackageManager.GET_ACTIVITIES or PackageManager.GET_DISABLED_COMPONENTS
             )
 
-            val activityExists = packageInfo.activities.any { it.name == componentName }
+            // Use safe call to handle nullable activities array
+            val activityExists = packageInfo.activities?.any { it.name == componentName } == true
+            
             Log.d(TAG, "Component exists: $componentName -> $activityExists")
             activityExists
         } catch (e: Exception) {

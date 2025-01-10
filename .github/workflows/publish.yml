@@ -16,15 +16,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Specify the Node.js version you want to use
+          node-version: '20'  # You can use the latest LTS version
 
       - name: Install dependencies
         run: |
           npm install  # Install dependencies, or yarn if you prefer
 
+      - name: Set up NPM authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+
       - name: Run build
         run: |
           npm run build  # Or use your custom build script
+
+      - name: Bump version (optional)
+        run: |
+          npm version patch  # Automatically bump version if needed
 
       - name: Publish to npm
         run: |

@@ -3,7 +3,7 @@ name: Build and Publish Expo Module
 on:
   push:
     branches:
-      - main  # Trigger the action only on pushes to the main branch
+      - mozzius-test-1  # Trigger the action only on pushes to the main branch
   workflow_dispatch:  # Allow manual triggering of the workflow
 
 jobs:

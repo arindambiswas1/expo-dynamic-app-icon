@@ -45,15 +45,18 @@ jobs:
         run: |
           ls node_modules
 
-      # Step 7: Clean up untracked files
-      # - name: Clean up untracked files
-      #   run: |
-      #     git clean -fdx  # Clean untracked files and directories
-
-      # Step 8: Check Git status
+      # Step 7: Check Git status
       - name: Check Git status
         run: |
           git status  # Verify that there are no uncommitted changes
+
+      # Step 8: Commit changes if needed
+      - name: Commit changes
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add -A
+          git commit -m "Auto-commit changes before bumping version" || echo "No changes to commit"
 
       # Step 9: Set up NPM authentication
       - name: Set up NPM authentication
@@ -69,19 +72,24 @@ jobs:
         run: |
           npm run build  # Replace with your specific build script if different
 
-      # Step 12: Bump version (optional)
+      # Step 12: Bump version
       - name: Bump version
         run: |
           npm version patch  # Automatically bump version if needed
 
-      # Step 13: Publish to npm
+      # Step 13: Push the new version tag
+      - name: Push changes
+        run: |
+          git push --follow-tags
+
+      # Step 14: Publish to npm
       - name: Publish to npm
         run: |
           npm publish --access public  # Publish to npm, --access public is required for public packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Use the NPM token securely stored in GitHub Secrets
 
-      # Step 14: Upload build artifacts (optional)
+      # Step 15: Upload build artifacts (optional)
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:

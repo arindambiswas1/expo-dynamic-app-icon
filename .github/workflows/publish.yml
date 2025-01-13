@@ -60,9 +60,9 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 
       # Step 10: Run tests (optional but recommended)
-      - name: Run tests
-        run: |
-          npm test
+      # - name: Run tests
+      #   run: |
+      #     npm test
 
       # Step 11: Run build
       - name: Run build

@@ -46,9 +46,9 @@ jobs:
           ls node_modules
 
       # Step 7: Clean up untracked files
-      - name: Clean up untracked files
-        run: |
-          git clean -fdx  # Clean untracked files and directories
+      # - name: Clean up untracked files
+      #   run: |
+      #     git clean -fdx  # Clean untracked files and directories
 
       # Step 8: Check Git status
       - name: Check Git status

@@ -1,9 +1,12 @@
 {
-  "name": "@arindambiswas1/b-expo-dynamic-app-icon",
-  "version": "1.0.0",
-  "description": "Expo dynamic app icon, Change app icon on IOS And Android with a single line of code",
+  "name": "@mozzius/expo-dynamic-app-icon",
+  "version": "1.6.0",
+  "description": "Programmatically change the app icon in Expo.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "expo-module build",
     "build:plugin": "tsc --build ./plugin",
@@ -22,28 +25,25 @@
     "expo-dynamic-app-icon",
     "ExpoDynamicAppIcon"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arindambiswas1/expo-dynamic-app-icon.git"
-  },
+  "repository": "https://github.com/mozzius/expo-dynamic-app-icon",
   "bugs": {
-    "url": "https://github.com/arindambiswas1/expo-dynamic-app-icon/issues"
+    "url": "https://github.com/mozzius/expo-dynamic-app-icon/issues"
   },
-  "author": "Hemza kouloughli <hemza@nixa.ca>",
+  "author": "Samuel Newman <mozzius@protonmail.com> (https://github.com/mozzius)",
   "license": "MIT",
-  "homepage": "https://github.com/arindambiswas1/expo-dynamic-app-icon#readme",
+  "homepage": "https://github.com/mozzius/expo-dynamic-app-icon#readme",
   "dependencies": {
-    "expo-modules": "^0.0.0"
+    "expo-modules-core": "^2.1.1",
+    "@expo/image-utils": "^0.6.3",
+    "xcode": "^3.0.1"
   },
   "devDependencies": {
-    "@expo/image-utils": "^0.3.23",
     "@types/react": "^18.0.25",
     "@types/react-native": "^0.70.6",
-    "expo-module-scripts": "^3.5.4",
-    "expo-modules-core": "^1.0.3"
+    "expo-module-scripts": "^4.0.2"
   },
   "peerDependencies": {
-    "expo": ">=49",
+    "expo": "^52",
     "react": "*",
     "react-native": "*"
   }

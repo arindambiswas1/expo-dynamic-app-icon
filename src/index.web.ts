@@ -1,4 +1,3 @@
-import ExpoDynamicAppIconModule from "./ExpoDynamicAppIconModule";
 import { DynamicAppIconRegistry } from "./types";
 
 export type IconName = DynamicAppIconRegistry["IconName"];
@@ -6,9 +5,11 @@ export type IconName = DynamicAppIconRegistry["IconName"];
 export function setAppIcon(
   name: IconName | null
 ): IconName | "DEFAULT" | false {
-  return ExpoDynamicAppIconModule.setAppIcon(name);
+  console.error("setAppIcon is not supported on web");
+  return false;
 }
 
 export function getAppIcon(): IconName | "DEFAULT" {
-  return ExpoDynamicAppIconModule.getAppIcon();
+  console.error("getAppIcon is not supported on web");
+  return "";
 }

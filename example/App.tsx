@@ -1,10 +1,14 @@
 import { Button, Text, View } from "react-native";
 
-import { getAppIcon, setAppIcon } from "expo-dynamic-app-icon";
+import {
+  getAppIcon,
+  IconName,
+  setAppIcon,
+} from "@mozzius/expo-dynamic-app-icon";
 import { useState } from "react";
 
 export default function App() {
-  const [iconName, setIconName] = useState<string>();
+  const [iconName, setIconName] = useState<IconName | "DEFAULT">();
 
   return (
     <View
@@ -22,14 +26,21 @@ export default function App() {
 
       <View style={{ marginBottom: 16 }}>
         <Button
-          title="change red icon"
-          onPress={() => console.log(setAppIcon("red"))}
+          title="change default icon"
+          onPress={() => console.log(setAppIcon(null))}
+        />
+      </View>
+
+      <View style={{ marginBottom: 16 }}>
+        <Button
+          title="change light icon"
+          onPress={() => console.log(setAppIcon("light"))}
         />
       </View>
 
       <Button
-        title="change gray icon"
-        onPress={() => console.log(setAppIcon("gray"))}
+        title="change dark icon"
+        onPress={() => console.log(setAppIcon("dark"))}
       />
     </View>
   );

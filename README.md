@@ -1,11 +1,19 @@
-# nixa-expo-dynamic-app-icon
+# @mozzius/expo-dynamic-app-icon
+
+> [!NOTE]
+> This is a fork of [expo-dynamic-app-icon](https://github.com/outsung/expo-dynamic-app-icon) to support Expo SDK 51.
+> It also includes:
+>
+> - support for resetting the icon to the default
+> - round icon support
+> - different icons for Android and iOS
 
 Programmatically change the app icon in Expo.
 
 ## Install
 
 ```
-npx expo install nixa-expo-dynamic-app-icon
+npx expo install @mozzius/expo-dynamic-app-icon
 ```
 
 ## Set icon file
@@ -15,17 +23,15 @@ add plugins in `app.json`
 ```typescript
  "plugins": [
       [
-        "nixa-expo-dynamic-app-icon",
+        "expo-dynamic-app-icon",
         {
           "red": { // icon name
-            "image": "./assets/icon1.png", // icon path
-            "prerendered": true, // for ios UIPrerenderedIcon option
-            "platforms":  ["ios", "android"]  // optional platforms array. defaults to both platforms if emitted
+            "ios": "./assets/ios_icon1.png", // icon path for ios
+            "android": "./assets/android_icon1.png", // icon path for android
+            "prerendered": true // for ios UIPrerenderedIcon option
           },
           "gray": {
-            "image": "./assets/icon2.png",
-            "prerendered": true,
-            "platforms":  ["ios"]
+            "android": "./assets/icon2.png", // android-only icon
           }
         }
       ]
@@ -66,13 +72,14 @@ create a new `expo-dev-client` and begin using `expo-dynamic-app-icon`
 
 - if error, return **false**
 - else, return **changed app icon name**
+- pass `null` to reset app icon to default
 
 ```typescript
-import { setAppIcon } from "nixa-expo-dynamic-app-icon";
+import { setAppIcon } from "expo-dynamic-app-icon";
 
 ...
 
-setAppIcon("red", "default_icon_name") // set icon 'assets/icon1.png'
+setAppIcon("red") // set icon 'assets/icon1.png'
 ```
 
 ## Use `getAppIcon`
@@ -82,9 +89,13 @@ get current app icon name
 - default return is `DEFAULT`
 
 ```typescript
-import { getAppIcon } from "nixa-expo-dynamic-app-icon";
+import { getAppIcon } from "expo-dynamic-app-icon";
 
 ...
 
 getAppIcon() // get current icon name 'red'
 ```
+
+Buy outsung (original author) a coffee! I couldn't have done it without his work! 👇
+
+<a href="https://www.buymeacoffee.com/outsung" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>

@@ -4,44 +4,86 @@ on:
   push:
     branches:
       - main  # Trigger the action only on pushes to the main branch
+  workflow_dispatch:  # Allow manual triggering of the workflow
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can use macos-latest if you're building for iOS
+    runs-on: ubuntu-latest  # Use Ubuntu as the build environment
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout the repository
-        uses: actions/checkout@v2  # Checkout the code
+        uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'  # You can use the latest LTS version
+          node-version: '20'  # Use the latest LTS version for Node.js
 
+      # Step 3: Cache Node.js modules
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Step 4: Install Expo CLI globally
+      - name: Install Expo CLI
+        run: |
+          npm install -g expo-cli
+
+      # Step 5: Install dependencies
       - name: Install dependencies
         run: |
-          npm install  # Install dependencies, or yarn if you prefer
+          npm install  # Use yarn install if your project uses Yarn
 
+      # Step 6: Verify installed modules
+      - name: List installed modules
+        run: |
+          ls node_modules
+
+      # Step 7: Clean up untracked files
       - name: Clean up untracked files
-        run: git clean -fdx  # Clean untracked files and directories
+        run: |
+          git clean -fdx  # Clean untracked files and directories
 
+      # Step 8: Check Git status
       - name: Check Git status
         run: |
           git status  # Verify that there are no uncommitted changes
 
+      # Step 9: Set up NPM authentication
       - name: Set up NPM authentication
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 
+      # Step 10: Run tests (optional but recommended)
+      - name: Run tests
+        run: |
+          npm test
+
+      # Step 11: Run build
       - name: Run build
         run: |
-          npm run build  # Or use your custom build script
+          npm run build  # Replace with your specific build script if different
 
-      - name: Bump version (optional)
+      # Step 12: Bump version (optional)
+      - name: Bump version
         run: |
           npm version patch  # Automatically bump version if needed
 
+      # Step 13: Publish to npm
       - name: Publish to npm
         run: |
           npm publish --access public  # Publish to npm, --access public is required for public packages
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Store your NPM token in GitHub Secrets
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}  # Use the NPM token securely stored in GitHub Secrets
+
+      # Step 14: Upload build artifacts (optional)
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist/  # Adjust to the path of your build directory
